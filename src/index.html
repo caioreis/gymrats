@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Gymrats 🐀</title>
+		<style>
+			.pyro > .before,
+			.pyro > .after {
+				position: absolute;
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
+					0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
+					0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
+					0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
+				-moz-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+				-webkit-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+				-o-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+				-ms-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+				animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+			}
+
+			.pyro > .after {
+				-moz-animation-delay: 1.25s, 1.25s, 1.25s;
+				-webkit-animation-delay: 1.25s, 1.25s, 1.25s;
+				-o-animation-delay: 1.25s, 1.25s, 1.25s;
+				-ms-animation-delay: 1.25s, 1.25s, 1.25s;
+				animation-delay: 1.25s, 1.25s, 1.25s;
+				-moz-animation-duration: 1.25s, 1.25s, 6.25s;
+				-webkit-animation-duration: 1.25s, 1.25s, 6.25s;
+				-o-animation-duration: 1.25s, 1.25s, 6.25s;
+				-ms-animation-duration: 1.25s, 1.25s, 6.25s;
+				animation-duration: 1.25s, 1.25s, 6.25s;
+			}
+
+			@-webkit-keyframes bang {
+				to {
+					box-shadow: -2px 2.3333333333px #aaff00, 65px -132.6666666667px #bfff00, 122px -206.6666666667px #00ffbb,
+						-247px -338.6666666667px #ff0044, 181px -139.6666666667px #3cff00, -74px -187.6666666667px #bbff00,
+						-160px -336.6666666667px #6600ff, -100px -127.6666666667px #ff00ea, -31px -396.6666666667px #eaff00,
+						-175px -294.6666666667px #ff00fb, 123px -197.6666666667px #9dff00, 105px -73.6666666667px #ffcc00,
+						-13px -60.6666666667px #ff6a00, -218px 0.3333333333px #ffbf00, -180px -316.6666666667px #f2ff00,
+						-121px -130.6666666667px #ffee00, 141px -406.6666666667px #c4ff00, -143px -122.6666666667px #3300ff,
+						87px -411.6666666667px #a6ff00, 4px -250.6666666667px #b700ff, -80px -66.6666666667px #ff00dd, -176px -2.6666666667px #0400ff,
+						-153px -48.6666666667px #0033ff, 67px -161.6666666667px #ff00e1, 204px 47.3333333333px #00ff8c, 105px 74.3333333333px #ff2200,
+						-164px -191.6666666667px #e600ff, -212px 42.3333333333px #006aff, 170px -16.6666666667px #00ffaa,
+						168px -396.6666666667px #ff00e1, -239px -312.6666666667px #7700ff, -17px -382.6666666667px #0040ff,
+						-146px -217.6666666667px #0084ff, -101px -117.6666666667px #fb00ff, -110px -341.6666666667px #ff1e00,
+						-39px -271.6666666667px #d0ff00, -72px -157.6666666667px #aeff00, 158px -98.6666666667px #00f2ff, -8px 60.3333333333px #1100ff,
+						-56px -96.6666666667px #6600ff, -98px -51.6666666667px #fff200, 227px -261.6666666667px #ff00b3, -55px -254.6666666667px #00ff15,
+						-161px -92.6666666667px #5eff00, 89px 65.3333333333px #ff004d, -88px 11.3333333333px #ff0095, -30px 23.3333333333px #0009ff,
+						-106px -298.6666666667px #55ff00, -188px -379.6666666667px #ff4000, -162px -78.6666666667px #0095ff,
+						174px -4.6666666667px #d900ff;
+				}
+			}
+			@-moz-keyframes bang {
+				to {
+					box-shadow: -2px 2.3333333333px #aaff00, 65px -132.6666666667px #bfff00, 122px -206.6666666667px #00ffbb,
+						-247px -338.6666666667px #ff0044, 181px -139.6666666667px #3cff00, -74px -187.6666666667px #bbff00,
+						-160px -336.6666666667px #6600ff, -100px -127.6666666667px #ff00ea, -31px -396.6666666667px #eaff00,
+						-175px -294.6666666667px #ff00fb, 123px -197.6666666667px #9dff00, 105px -73.6666666667px #ffcc00,
+						-13px -60.6666666667px #ff6a00, -218px 0.3333333333px #ffbf00, -180px -316.6666666667px #f2ff00,
+						-121px -130.6666666667px #ffee00, 141px -406.6666666667px #c4ff00, -143px -122.6666666667px #3300ff,
+						87px -411.6666666667px #a6ff00, 4px -250.6666666667px #b700ff, -80px -66.6666666667px #ff00dd, -176px -2.6666666667px #0400ff,
+						-153px -48.6666666667px #0033ff, 67px -161.6666666667px #ff00e1, 204px 47.3333333333px #00ff8c, 105px 74.3333333333px #ff2200,
+						-164px -191.6666666667px #e600ff, -212px 42.3333333333px #006aff, 170px -16.6666666667px #00ffaa,
+						168px -396.6666666667px #ff00e1, -239px -312.6666666667px #7700ff, -17px -382.6666666667px #0040ff,
+						-146px -217.6666666667px #0084ff, -101px -117.6666666667px #fb00ff, -110px -341.6666666667px #ff1e00,
+						-39px -271.6666666667px #d0ff00, -72px -157.6666666667px #aeff00, 158px -98.6666666667px #00f2ff, -8px 60.3333333333px #1100ff,
+						-56px -96.6666666667px #6600ff, -98px -51.6666666667px #fff200, 227px -261.6666666667px #ff00b3, -55px -254.6666666667px #00ff15,
+						-161px -92.6666666667px #5eff00, 89px 65.3333333333px #ff004d, -88px 11.3333333333px #ff0095, -30px 23.3333333333px #0009ff,
+						-106px -298.6666666667px #55ff00, -188px -379.6666666667px #ff4000, -162px -78.6666666667px #0095ff,
+						174px -4.6666666667px #d900ff;
+				}
+			}
+			@-o-keyframes bang {
+				to {
+					box-shadow: -2px 2.3333333333px #aaff00, 65px -132.6666666667px #bfff00, 122px -206.6666666667px #00ffbb,
+						-247px -338.6666666667px #ff0044, 181px -139.6666666667px #3cff00, -74px -187.6666666667px #bbff00,
+						-160px -336.6666666667px #6600ff, -100px -127.6666666667px #ff00ea, -31px -396.6666666667px #eaff00,
+						-175px -294.6666666667px #ff00fb, 123px -197.6666666667px #9dff00, 105px -73.6666666667px #ffcc00,
+						-13px -60.6666666667px #ff6a00, -218px 0.3333333333px #ffbf00, -180px -316.6666666667px #f2ff00,
+						-121px -130.6666666667px #ffee00, 141px -406.6666666667px #c4ff00, -143px -122.6666666667px #3300ff,
+						87px -411.6666666667px #a6ff00, 4px -250.6666666667px #b700ff, -80px -66.6666666667px #ff00dd, -176px -2.6666666667px #0400ff,
+						-153px -48.6666666667px #0033ff, 67px -161.6666666667px #ff00e1, 204px 47.3333333333px #00ff8c, 105px 74.3333333333px #ff2200,
+						-164px -191.6666666667px #e600ff, -212px 42.3333333333px #006aff, 170px -16.6666666667px #00ffaa,
+						168px -396.6666666667px #ff00e1, -239px -312.6666666667px #7700ff, -17px -382.6666666667px #0040ff,
+						-146px -217.6666666667px #0084ff, -101px -117.6666666667px #fb00ff, -110px -341.6666666667px #ff1e00,
+						-39px -271.6666666667px #d0ff00, -72px -157.6666666667px #aeff00, 158px -98.6666666667px #00f2ff, -8px 60.3333333333px #1100ff,
+						-56px -96.6666666667px #6600ff, -98px -51.6666666667px #fff200, 227px -261.6666666667px #ff00b3, -55px -254.6666666667px #00ff15,
+						-161px -92.6666666667px #5eff00, 89px 65.3333333333px #ff004d, -88px 11.3333333333px #ff0095, -30px 23.3333333333px #0009ff,
+						-106px -298.6666666667px #55ff00, -188px -379.6666666667px #ff4000, -162px -78.6666666667px #0095ff,
+						174px -4.6666666667px #d900ff;
+				}
+			}
+			@-ms-keyframes bang {
+				to {
+					box-shadow: -2px 2.3333333333px #aaff00, 65px -132.6666666667px #bfff00, 122px -206.6666666667px #00ffbb,
+						-247px -338.6666666667px #ff0044, 181px -139.6666666667px #3cff00, -74px -187.6666666667px #bbff00,
+						-160px -336.6666666667px #6600ff, -100px -127.6666666667px #ff00ea, -31px -396.6666666667px #eaff00,
+						-175px -294.6666666667px #ff00fb, 123px -197.6666666667px #9dff00, 105px -73.6666666667px #ffcc00,
+						-13px -60.6666666667px #ff6a00, -218px 0.3333333333px #ffbf00, -180px -316.6666666667px #f2ff00,
+						-121px -130.6666666667px #ffee00, 141px -406.6666666667px #c4ff00, -143px -122.6666666667px #3300ff,
+						87px -411.6666666667px #a6ff00, 4px -250.6666666667px #b700ff, -80px -66.6666666667px #ff00dd, -176px -2.6666666667px #0400ff,
+						-153px -48.6666666667px #0033ff, 67px -161.6666666667px #ff00e1, 204px 47.3333333333px #00ff8c, 105px 74.3333333333px #ff2200,
+						-164px -191.6666666667px #e600ff, -212px 42.3333333333px #006aff, 170px -16.6666666667px #00ffaa,
+						168px -396.6666666667px #ff00e1, -239px -312.6666666667px #7700ff, -17px -382.6666666667px #0040ff,
+						-146px -217.6666666667px #0084ff, -101px -117.6666666667px #fb00ff, -110px -341.6666666667px #ff1e00,
+						-39px -271.6666666667px #d0ff00, -72px -157.6666666667px #aeff00, 158px -98.6666666667px #00f2ff, -8px 60.3333333333px #1100ff,
+						-56px -96.6666666667px #6600ff, -98px -51.6666666667px #fff200, 227px -261.6666666667px #ff00b3, -55px -254.6666666667px #00ff15,
+						-161px -92.6666666667px #5eff00, 89px 65.3333333333px #ff004d, -88px 11.3333333333px #ff0095, -30px 23.3333333333px #0009ff,
+						-106px -298.6666666667px #55ff00, -188px -379.6666666667px #ff4000, -162px -78.6666666667px #0095ff,
+						174px -4.6666666667px #d900ff;
+				}
+			}
+			@keyframes bang {
+				to {
+					box-shadow: -2px 2.3333333333px #aaff00, 65px -132.6666666667px #bfff00, 122px -206.6666666667px #00ffbb,
+						-247px -338.6666666667px #ff0044, 181px -139.6666666667px #3cff00, -74px -187.6666666667px #bbff00,
+						-160px -336.6666666667px #6600ff, -100px -127.6666666667px #ff00ea, -31px -396.6666666667px #eaff00,
+						-175px -294.6666666667px #ff00fb, 123px -197.6666666667px #9dff00, 105px -73.6666666667px #ffcc00,
+						-13px -60.6666666667px #ff6a00, -218px 0.3333333333px #ffbf00, -180px -316.6666666667px #f2ff00,
+						-121px -130.6666666667px #ffee00, 141px -406.6666666667px #c4ff00, -143px -122.6666666667px #3300ff,
+						87px -411.6666666667px #a6ff00, 4px -250.6666666667px #b700ff, -80px -66.6666666667px #ff00dd, -176px -2.6666666667px #0400ff,
+						-153px -48.6666666667px #0033ff, 67px -161.6666666667px #ff00e1, 204px 47.3333333333px #00ff8c, 105px 74.3333333333px #ff2200,
+						-164px -191.6666666667px #e600ff, -212px 42.3333333333px #006aff, 170px -16.6666666667px #00ffaa,
+						168px -396.6666666667px #ff00e1, -239px -312.6666666667px #7700ff, -17px -382.6666666667px #0040ff,
+						-146px -217.6666666667px #0084ff, -101px -117.6666666667px #fb00ff, -110px -341.6666666667px #ff1e00,
+						-39px -271.6666666667px #d0ff00, -72px -157.6666666667px #aeff00, 158px -98.6666666667px #00f2ff, -8px 60.3333333333px #1100ff,
+						-56px -96.6666666667px #6600ff, -98px -51.6666666667px #fff200, 227px -261.6666666667px #ff00b3, -55px -254.6666666667px #00ff15,
+						-161px -92.6666666667px #5eff00, 89px 65.3333333333px #ff004d, -88px 11.3333333333px #ff0095, -30px 23.3333333333px #0009ff,
+						-106px -298.6666666667px #55ff00, -188px -379.6666666667px #ff4000, -162px -78.6666666667px #0095ff,
+						174px -4.6666666667px #d900ff;
+				}
+			}
+			@-webkit-keyframes gravity {
+				to {
+					transform: translateY(200px);
+					-moz-transform: translateY(200px);
+					-webkit-transform: translateY(200px);
+					-o-transform: translateY(200px);
+					-ms-transform: translateY(200px);
+					opacity: 0;
+				}
+			}
+			@-moz-keyframes gravity {
+				to {
+					transform: translateY(200px);
+					-moz-transform: translateY(200px);
+					-webkit-transform: translateY(200px);
+					-o-transform: translateY(200px);
+					-ms-transform: translateY(200px);
+					opacity: 0;
+				}
+			}
+			@-o-keyframes gravity {
+				to {
+					transform: translateY(200px);
+					-moz-transform: translateY(200px);
+					-webkit-transform: translateY(200px);
+					-o-transform: translateY(200px);
+					-ms-transform: translateY(200px);
+					opacity: 0;
+				}
+			}
+			@-ms-keyframes gravity {
+				to {
+					transform: translateY(200px);
+					-moz-transform: translateY(200px);
+					-webkit-transform: translateY(200px);
+					-o-transform: translateY(200px);
+					-ms-transform: translateY(200px);
+					opacity: 0;
+				}
+			}
+			@keyframes gravity {
+				to {
+					transform: translateY(200px);
+					-moz-transform: translateY(200px);
+					-webkit-transform: translateY(200px);
+					-o-transform: translateY(200px);
+					-ms-transform: translateY(200px);
+					opacity: 0;
+				}
+			}
+			@-webkit-keyframes position {
+				0%,
+				19.9% {
+					margin-top: 10%;
+					margin-left: 40%;
+				}
+				20%,
+				39.9% {
+					margin-top: 40%;
+					margin-left: 30%;
+				}
+				40%,
+				59.9% {
+					margin-top: 20%;
+					margin-left: 70%;
+				}
+				60%,
+				79.9% {
+					margin-top: 30%;
+					margin-left: 20%;
+				}
+				80%,
+				99.9% {
+					margin-top: 30%;
+					margin-left: 80%;
+				}
+			}
+			@-moz-keyframes position {
+				0%,
+				19.9% {
+					margin-top: 10%;
+					margin-left: 40%;
+				}
+				20%,
+				39.9% {
+					margin-top: 40%;
+					margin-left: 30%;
+				}
+				40%,
+				59.9% {
+					margin-top: 20%;
+					margin-left: 70%;
+				}
+				60%,
+				79.9% {
+					margin-top: 30%;
+					margin-left: 20%;
+				}
+				80%,
+				99.9% {
+					margin-top: 30%;
+					margin-left: 80%;
+				}
+			}
+			@-o-keyframes position {
+				0%,
+				19.9% {
+					margin-top: 10%;
+					margin-left: 40%;
+				}
+				20%,
+				39.9% {
+					margin-top: 40%;
+					margin-left: 30%;
+				}
+				40%,
+				59.9% {
+					margin-top: 20%;
+					margin-left: 70%;
+				}
+				60%,
+				79.9% {
+					margin-top: 30%;
+					margin-left: 20%;
+				}
+				80%,
+				99.9% {
+					margin-top: 30%;
+					margin-left: 80%;
+				}
+			}
+			@-ms-keyframes position {
+				0%,
+				19.9% {
+					margin-top: 10%;
+					margin-left: 40%;
+				}
+				20%,
+				39.9% {
+					margin-top: 40%;
+					margin-left: 30%;
+				}
+				40%,
+				59.9% {
+					margin-top: 20%;
+					margin-left: 70%;
+				}
+				60%,
+				79.9% {
+					margin-top: 30%;
+					margin-left: 20%;
+				}
+				80%,
+				99.9% {
+					margin-top: 30%;
+					margin-left: 80%;
+				}
+			}
+			@keyframes position {
+				0%,
+				19.9% {
+					margin-top: 10%;
+					margin-left: 40%;
+				}
+				20%,
+				39.9% {
+					margin-top: 40%;
+					margin-left: 30%;
+				}
+				40%,
+				59.9% {
+					margin-top: 20%;
+					margin-left: 70%;
+				}
+				60%,
+				79.9% {
+					margin-top: 30%;
+					margin-left: 20%;
+				}
+				80%,
+				99.9% {
+					margin-top: 30%;
+					margin-left: 80%;
+				}
+			}
+		</style>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				font-size: 14px;
+				background: #f3f3f3;
+			}
+			header {
+				background: #2c3e50;
+				color: #ecf0f1;
+				padding: 15px 20px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				position: fixed;
+				width: 100%;
+				top: 0;
+				z-index: 999;
+				box-sizing: border-box;
+			}
+			.title {
+				font-size: 20px;
+				margin: 0;
+			}
+			.round-info {
+				font-size: 14px;
+				opacity: 0.8;
+			}
+			.actions {
+				display: flex;
+				gap: 10px;
+				align-items: center;
+			}
+			#nextMatch {
+				background: #2980b9;
+				color: #ecf0f1;
+				border: none;
+				padding: 8px 12px;
+				font-size: 14px;
+				cursor: pointer;
+				border-radius: 4px;
+			}
+
+			#nextMatch:hover {
+				background: #3498db;
+			}
+			#info {
+				margin: 80px 20px 20px 20px;
+				text-align: center;
+			}
+			.main-bracket {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				position: relative;
+				padding-top: 100px;
+			}
+
+			.bracket-container {
+				display: inline-block;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				background: #fff;
+				box-sizing: border-box;
+				max-height: calc(100vh - 150px);
+				overflow: auto;
+				padding: 20px;
+			}
+
+			.left-side {
+				margin-left: 20px;
+			}
+
+			.right-side {
+				margin-right: 20px;
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+			}
+
+			.center {
+				margin: 0 20px;
+				min-width: 200px;
+			}
+
+			.round {
+				display: inline-block;
+				vertical-align: top;
+				margin: 0 20px;
+			}
+			.match {
+				display: block;
+				border: 1px solid #ddd;
+				background: #fff;
+				margin-bottom: 10px;
+				padding: 5px;
+				border-radius: 5px;
+				min-width: 160px;
+				position: relative;
+			}
+			.match:hover {
+				background: #f0f8ff;
+			}
+			.participant {
+				margin: 2px 0;
+				line-height: 1.2em;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+			.winner {
+				font-weight: bold;
+				color: green;
+			}
+			.bye {
+				font-style: italic;
+				color: #999;
+			}
+			.round:last-child .match {
+				border-color: #aaa;
+				background: #f9f9f9;
+			}
+			.photo {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+
+			/* Modal Styles */
+			#modalOverlay {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+			}
+
+			#modalContent {
+				background: #fff;
+				border-radius: 5px;
+				padding: 20px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 600px;
+				max-width: 90%;
+				text-align: center;
+			}
+
+			#closeModal {
+				background: #2980b9;
+				color: #ecf0f1;
+				border: none;
+				padding: 8px 12px;
+				font-size: 14px;
+				cursor: pointer;
+				border-radius: 4px;
+				margin-top: 20px;
+			}
+			#closeModal:hover {
+				background: #3498db;
+			}
+
+			.modal-participants {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				margin-bottom: 20px;
+				flex-wrap: wrap;
+			}
+
+			.modal-participant {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.modal-participant img {
+				width: 200px;
+				height: 200px;
+				object-fit: cover;
+				border-radius: 5px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div>
+				<h1 class="title">Gymrats 🐀</h1>
+				<div class="round-info" id="roundInfo"></div>
+			</div>
+			<div class="actions">
+				<button id="nextMatch">Rodar próximo jogo</button>
+			</div>
+		</header>
+		<div id="info"></div>
+		<div class="main-bracket">
+			<div class="bracket-container left-side" id="left-bracket"></div>
+			<div class="bracket-container right-side" id="right-bracket"></div>
+		</div>
+
+		<!-- Modal -->
+		<div id="modalOverlay">
+			<div id="modalContent">
+				<h2>Próximo jogo</h2>
+				<div class="modal-participants" id="modalParticipants"></div>
+				<div id="countdown" style="font-size: 24px; margin-bottom: 20px"></div>
+				<div id="pyro" class="pyro">
+					<div class="before"></div>
+					<div class="after"></div>
+				</div>
+				<div id="modalResult" style="font-size: 42px; color: #333; margin-bottom: 20px"></div>
+				<button id="closeModal" style="display: none">Fechar</button>
+			</div>
+		</div>
+
+		<script>
+			const data = {
+				teams: [
+					{ name: 'Jordania', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Jordania.jpg' },
+					{ name: 'Nayara', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Nayara+Reis.jpg' },
+					{ name: 'Marina Sanz', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Marina+Sanz.jpg' },
+					{ name: 'Anselmo Fernandes', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Anselmo+Fernandes.jpeg' },
+					{ name: 'Cecília', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Cecilia.png' },
+					{ name: 'Pedro Duarte', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Pedro+Duarte.jpg' },
+					{ name: 'Diego', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Diego+Santos.jpeg' },
+					{ name: 'Marina Greco', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Marina+Greco.jpeg' },
+					{ name: 'Luiz Andrade', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Luiz+Andrade.jpeg' },
+					{ name: 'Aralyne', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Aralyne+Gonçalves.png' },
+					{ name: 'Leonardo Fernandes', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Leonardo+Fernandes.jpg' },
+					{ name: 'Kaique Gazola', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Kaique.jpg' },
+					{ name: 'Mateus Carvalho', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Mateus+Carvalho.jpeg' },
+					{ name: 'Wendel Lima', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Wendel.jpg' },
+					{ name: 'Raphael Teodoro', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Raphael+Teodoro.png' },
+					{ name: 'Lucas Parada', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Lucas+Parada.jpg' },
+					{ name: 'Stefani', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Stefani.jpg' },
+					{ name: 'Aline Alves De Santana', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Aline+Santana.png' },
+					{ name: 'Arthur', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Arthur+Oliveira.jpeg' },
+					{ name: 'Kelly Souza', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Kelly.jpg' },
+					{ name: 'Cinthia Nunes', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Cinthia+Nunes.jpeg' },
+				],
+			};
+
+			const brazilianTeamsData = [
+				{
+					name: 'Flamengo',
+					image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flamengo_braz_logo.svg/120px-Flamengo_braz_logo.svg.png',
+				},
+				{
+					name: 'Corinthians',
+					image: 'https://upload.wikimedia.org/wikipedia/pt/thumb/b/b4/Corinthians_simbolo.png/120px-Corinthians_simbolo.png',
+				},
+				{
+					name: 'Palmeiras',
+					image: 'https://s.sde.globo.com/media/organizations/2019/07/06/Palmeiras.svg',
+				},
+				{
+					name: 'São Paulo',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/sao-paulo.svg',
+				},
+				{
+					name: 'Santos',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/12/santos.svg',
+				},
+				{
+					name: 'Vasco',
+					image: 'https://s.sde.globo.com/media/organizations/2021/09/04/vasco_SVG.svg',
+				},
+				{
+					name: 'Cruzeiro',
+					image: 'https://s.sde.globo.com/media/organizations/2021/02/13/cruzeiro_2021.svg',
+				},
+				{
+					name: 'Fluminense',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/fluminense.svg',
+				},
+				{
+					name: 'Grêmio',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/12/gremio.svg',
+				},
+				{
+					name: 'Internacional',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/internacional.svg',
+				},
+				{
+					name: 'Atlético Mineiro',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/10/atletico-mg.svg',
+				},
+				{
+					name: 'Bahia',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/bahia.svg',
+				},
+				{
+					name: 'Botafogo',
+					image: 'https://s.sde.globo.com/media/organizations/2019/02/04/botafogo-svg.svg',
+				},
+				{
+					name: 'Goiás',
+					image: 'https://s.sde.globo.com/media/organizations/2021/03/01/GOIAS-2021.svg',
+				},
+				{
+					name: 'Athletico-PR',
+					image: 'https://s.sde.globo.com/media/organizations/2019/09/09/Athletico-PR.svg',
+				},
+				{
+					name: 'Ceará',
+					image: 'https://s.sde.globo.com/media/organizations/2019/10/10/ceara.svg',
+				},
+				{
+					name: 'Fortaleza',
+					image: 'https://s.sde.globo.com/media/organizations/2021/09/19/Fortaleza_2021_1.svg',
+				},
+				{
+					name: 'Sport Recife',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/sport.svg',
+				},
+				{
+					name: 'Vitória',
+					image: 'https://s.sde.globo.com/media/organizations/2024/04/09/escudo-vitoria-svg-69281.svg',
+				},
+				{
+					name: 'Chapecoense',
+					image: 'https://s.sde.globo.com/media/organizations/2021/06/21/CHAPECOENSE-2018.svg',
+				},
+				{
+					name: 'Ponte Preta',
+					image: 'https://s.sde.globo.com/media/organizations/2019/03/17/ponte-preta.svg',
+				},
+				{
+					name: 'Figueirense',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/figueirense.svg',
+				},
+				{
+					name: 'Avaí',
+					image: 'https://s.sde.globo.com/media/organizations/2024/05/12/ava%C3%AD.svg',
+				},
+				{
+					name: 'Juventude',
+					image: 'https://s.sde.globo.com/media/organizations/2021/04/29/Juventude-2021-01.svg',
+				},
+				{
+					name: 'Paraná',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/parana.svg',
+				},
+				{
+					name: 'Guarani',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/guarani.svg',
+				},
+			];
+
+			function getRandomBrazilianTeam() {
+				const randomIndex = Math.floor(Math.random() * brazilianTeamsData.length);
+				return { ...brazilianTeamsData[randomIndex], isBye: true };
+			}
+
+			function shuffle(arr) {
+				for (let i = arr.length - 1; i > 0; i--) {
+					const j = Math.floor(Math.random() * (i + 1));
+					[arr[i], arr[j]] = [arr[j], arr[i]];
+				}
+				return arr;
+			}
+
+			function nextPowerOfTwo(n) {
+				let p = 1;
+				while (p < n) p *= 2;
+				return p;
+			}
+
+			let participants = shuffle(data.teams.slice());
+			const originalCount = participants.length;
+			const halfCount = Math.floor(originalCount / 2);
+			const leftParticipants = participants.slice(0, halfCount);
+			const rightParticipants = participants.slice(halfCount);
+
+			const leftTargetCount = nextPowerOfTwo(leftParticipants.length);
+			const leftByesNeeded = leftTargetCount - leftParticipants.length;
+
+			const rightTargetCount = nextPowerOfTwo(rightParticipants.length);
+			const rightByesNeeded = rightTargetCount - rightParticipants.length;
+
+			function createFirstRound(participants, byesNeeded) {
+				const matches = [];
+				const participantsForByes = participants.slice(0, byesNeeded);
+				const remaining = participants.slice(byesNeeded);
+				for (let i = 0; i < byesNeeded; i++) {
+					matches.push({
+						player1: participantsForByes[i],
+						player2: getRandomBrazilianTeam(),
+						goals1: null,
+						goals2: null,
+						winner: null,
+						diff: null,
+					});
+				}
+				for (let i = 0; i < remaining.length; i += 2) {
+					const p1 = remaining[i];
+					const p2 = i + 1 < remaining.length ? remaining[i + 1] : getRandomBrazilianTeam();
+					matches.push({
+						player1: p1,
+						player2: p2,
+						goals1: null,
+						goals2: null,
+						winner: null,
+						diff: null,
+					});
+				}
+				return matches;
+			}
+
+			function createMatches(parts) {
+				const matches = [];
+				for (let i = 0; i < parts.length; i += 2) {
+					const p1 = parts[i];
+					const p2 = i + 1 < parts.length ? parts[i + 1] : getRandomBrazilianTeam();
+					matches.push({
+						player1: p1,
+						player2: p2,
+						goals1: null,
+						goals2: null,
+						winner: null,
+						diff: null,
+					});
+				}
+				return matches;
+			}
+
+			let leftRoundsData = [];
+			let rightRoundsData = [];
+			leftRoundsData.push(createFirstRound(leftParticipants, leftByesNeeded));
+			rightRoundsData.push(createFirstRound(rightParticipants, rightByesNeeded));
+
+			let leftCurrentRoundIndex = 0;
+			let leftCurrentMatchIndex = 0;
+
+			let rightCurrentRoundIndex = 0;
+			let rightCurrentMatchIndex = 0;
+
+			let finalRoundData = [];
+			let finalMatchResolved = false;
+
+			// Global control for alternating rounds
+			let globalRoundIndex = 0;
+			let playingLeftSide = true;
+
+			function updateRoundInfo() {
+				const leftChampion = getChampion(leftRoundsData);
+				const rightChampion = getChampion(rightRoundsData);
+
+				let info = '';
+				if (!leftChampion || !rightChampion) {
+					info = `Rodada atual: ${globalRoundIndex + 1} - ${playingLeftSide ? 'Lado esquerdo' : 'Lado direito'}`;
+				} else if (!finalMatchResolved) {
+					info = 'Rodada final';
+				} else {
+					info = 'Campeonato encerrado';
+				}
+				document.getElementById('roundInfo').textContent = info;
+			}
+
+			function penaltyShootout(player1, player2) {
+				let p1Score = 0;
+				let p2Score = 0;
+				const totalPenalties = 5;
+
+				for (let i = 0; i < totalPenalties; i++) {
+					if (Math.random() < 0.7) {
+						p1Score++;
+					}
+					if (Math.random() < 0.7) {
+						p2Score++;
+					}
+				}
+
+				while (p1Score === p2Score) {
+					if (Math.random() < 0.7) {
+						p1Score++;
+					}
+					if (Math.random() < 0.7) {
+						p2Score++;
+					}
+				}
+
+				const winner = p1Score > p2Score ? player1 : player2;
+				return { winner, p1Score, p2Score };
+			}
+
+			function startNextRound(side) {
+				let roundsData = side === 'left' ? leftRoundsData : rightRoundsData;
+				let currentRoundIndex = side === 'left' ? leftCurrentRoundIndex : rightCurrentRoundIndex;
+
+				const roundMatches = roundsData[currentRoundIndex];
+				const winners = roundMatches.map((m) => m.winner);
+				if (winners.length === 1) return;
+
+				roundsData.push(createMatches(winners));
+				if (side === 'left') {
+					leftCurrentRoundIndex++;
+					leftCurrentMatchIndex = 0;
+				} else {
+					rightCurrentRoundIndex++;
+					rightCurrentMatchIndex = 0;
+				}
+			}
+
+			function updateBracket() {
+				updateRoundInfo();
+				const leftBracketContainer = document.getElementById('left-bracket');
+				const rightBracketContainer = document.getElementById('right-bracket');
+
+				leftBracketContainer.innerHTML = '';
+				rightBracketContainer.innerHTML = '';
+
+				// Render Left Side (normal order: earliest rounds on the left, final rounds towards center)
+				for (let r = 0; r < leftRoundsData.length; r++) {
+					const roundDiv = document.createElement('div');
+					roundDiv.classList.add('round');
+					const roundMatches = leftRoundsData[r];
+					for (let m = 0; m < roundMatches.length; m++) {
+						roundDiv.appendChild(createMatchElement(roundMatches[m]));
+					}
+					leftBracketContainer.appendChild(roundDiv);
+				}
+
+				// Render Right Side (reverse order: earliest rounds on the far right, final rounds towards center)
+				for (let r = rightRoundsData.length - 1; r >= 0; r--) {
+					const roundDiv = document.createElement('div');
+					roundDiv.classList.add('round');
+					const roundMatches = rightRoundsData[r];
+					for (let m = 0; m < roundMatches.length; m++) {
+						roundDiv.appendChild(createMatchElement(roundMatches[m]));
+					}
+					rightBracketContainer.appendChild(roundDiv);
+				}
+
+				// If both sides have winners, show final match
+				const leftChampion = getChampion(leftRoundsData);
+				const rightChampion = getChampion(rightRoundsData);
+				if (leftChampion && rightChampion) {
+					if (finalRoundData.length === 0) {
+						finalRoundData.push([
+							{
+								player1: leftChampion,
+								player2: rightChampion,
+								goals1: null,
+								goals2: null,
+								winner: null,
+								diff: null,
+							},
+						]);
+					}
+					// render final match
+					const finalRound = finalRoundData[0];
+					const finalDiv = document.createElement('div');
+					finalDiv.classList.add('round');
+					for (let m = 0; m < finalRound.length; m++) {
+						finalDiv.appendChild(createMatchElement(finalRound[m]));
+					}
+				}
+
+				const infoDiv = document.getElementById('info');
+				const finalWinner = finalRoundData.length > 0 ? finalRoundData[0][0].winner : null;
+				if (finalWinner) {
+					infoDiv.innerHTML = `<h2>Final Winner: <span class='winner'>${finalWinner.name}</span></h2>`;
+				} else {
+					infoDiv.innerHTML = '';
+				}
+			}
+
+			function createMatchElement(match) {
+				const matchDiv = document.createElement('div');
+				matchDiv.classList.add('match');
+				const p1Div = document.createElement('div');
+				p1Div.classList.add('participant');
+				const img1 = document.createElement('img');
+				img1.classList.add('photo');
+				img1.src = match.player1.image;
+				p1Div.appendChild(img1);
+				const p1Name = document.createElement('span');
+				p1Name.textContent = match.player1.name;
+				p1Div.appendChild(p1Name);
+				if (match.winner === match.player1) p1Div.classList.add('winner');
+
+				const p2Div = document.createElement('div');
+				p2Div.classList.add('participant');
+				const img2 = document.createElement('img');
+				img2.classList.add('photo');
+				img2.src = match.player2.image;
+				p2Div.appendChild(img2);
+				const p2Name = document.createElement('span');
+				p2Name.textContent = match.player2.name;
+				p2Div.appendChild(p2Name);
+				if (match.player2.isBye) p2Div.classList.add('bye');
+				if (match.winner === match.player2) p2Div.classList.add('winner');
+
+				matchDiv.appendChild(p1Div);
+				matchDiv.appendChild(p2Div);
+
+				if (match.goals1 !== null && match.goals2 !== null) {
+					const score = document.createElement('div');
+					score.style.fontSize = '12px';
+					score.style.color = '#333';
+					let scoreText = `Resultado: ${match.goals1} x ${match.goals2}`;
+					if (match.penalties1 !== undefined && match.penalties2 !== undefined) {
+						scoreText += ` (Pênaltis: ${match.penalties1} x ${match.penalties2})`;
+					}
+					score.textContent = scoreText;
+					matchDiv.appendChild(score);
+				}
+
+				return matchDiv;
+			}
+
+			function getChampion(roundsData) {
+				const lastRound = roundsData[roundsData.length - 1];
+				if (lastRound.length === 1 && lastRound[0].winner) {
+					return lastRound[0].winner;
+				}
+				return null;
+			}
+
+			document.getElementById('nextMatch').addEventListener('click', showNextMatchModal);
+
+			function showNextMatchModal() {
+				const leftChampion = getChampion(leftRoundsData);
+				const rightChampion = getChampion(rightRoundsData);
+
+				// If final already resolved:
+				if (finalRoundData.length > 0 && finalRoundData[0][0].winner) {
+					alert('Vencedor: ' + finalRoundData[0][0].winner.name);
+					return;
+				}
+
+				if (!leftChampion || !rightChampion) {
+					if (playingLeftSide) {
+						playNextMatchSide('left');
+					} else {
+						playNextMatchSide('right');
+					}
+				} else {
+					// Both have champions, final match now
+					playFinalMatch();
+				}
+			}
+
+			function playNextMatchSide(side) {
+				let roundsData = side === 'left' ? leftRoundsData : rightRoundsData;
+				let currentRoundIndex = side === 'left' ? leftCurrentRoundIndex : rightCurrentRoundIndex;
+				let currentMatchIndex = side === 'left' ? leftCurrentMatchIndex : rightCurrentMatchIndex;
+
+				// Ensure we're on the globalRoundIndex
+				if (currentRoundIndex !== globalRoundIndex) {
+					// No matches in this round for this side. Switch sides if done.
+					switchSidesIfDone(side);
+					return;
+				}
+
+				const roundMatches = roundsData[currentRoundIndex];
+
+				if (currentMatchIndex >= roundMatches.length) {
+					// Round finished for this side
+					startNextRound(side);
+					switchSidesIfDone(side);
+					return;
+				}
+
+				const matchObj = roundMatches[currentMatchIndex];
+				if (matchObj.winner) {
+					// Move on to next match
+					if (side === 'left') {
+						leftCurrentMatchIndex++;
+					} else {
+						rightCurrentMatchIndex++;
+					}
+					playNextMatchSide(side);
+					return;
+				}
+
+				showModalForMatch(matchObj, function () {
+					// after close
+					if (side === 'left') {
+						leftCurrentMatchIndex++;
+						if (leftCurrentMatchIndex >= roundsData[currentRoundIndex].length) {
+							startNextRound('left');
+							switchSidesIfDone('left');
+						}
+					} else {
+						rightCurrentMatchIndex++;
+						if (rightCurrentMatchIndex >= roundsData[currentRoundIndex].length) {
+							startNextRound('right');
+							switchSidesIfDone('right');
+						}
+					}
+					updateBracket();
+				});
+			}
+
+			function switchSidesIfDone(side) {
+				let leftDone =
+					leftCurrentRoundIndex > globalRoundIndex ||
+					(leftRoundsData[leftCurrentRoundIndex].every((m) => m.winner !== null) && leftCurrentRoundIndex === globalRoundIndex);
+				let rightDone =
+					rightCurrentRoundIndex > globalRoundIndex ||
+					(rightRoundsData[rightCurrentRoundIndex].every((m) => m.winner !== null) && rightCurrentRoundIndex === globalRoundIndex);
+
+				if (side === 'left' && leftDone) {
+					// Switch to right side
+					playingLeftSide = false;
+				} else if (side === 'right' && rightDone) {
+					// Both sides done for this round, move to next round
+					if (leftDone && rightDone) {
+						globalRoundIndex++;
+						playingLeftSide = true; // Next cycle starts with left side again
+					}
+				}
+				updateBracket();
+			}
+
+			function playFinalMatch() {
+				const finalMatch = finalRoundData[0][0];
+				if (finalMatch.winner) {
+					alert('Tournament ended! Winner: ' + finalMatch.winner.name);
+					return;
+				}
+				showModalForMatch(finalMatch, function () {
+					finalMatchResolved = true;
+					updateBracket();
+				});
+			}
+
+			function showModalForMatch(matchObj, callback) {
+				document.getElementById('modalOverlay').style.display = 'block';
+				const modalParticipants = document.getElementById('modalParticipants');
+				modalParticipants.innerHTML = `
+			<div class="modal-participant">
+				<img src="${matchObj.player1.image}" />
+				<div>${matchObj.player1.name}</div>
+			</div>
+			<div style="font-weight:bold;">VS</div>
+			<div class="modal-participant">
+				<img src="${matchObj.player2.image}" />
+				<div>${matchObj.player2.name}</div>
+			</div>
+		`;
+
+				document.getElementById('pyro').style.display = 'none';
+				document.getElementById('modalResult').textContent = '';
+				document.getElementById('closeModal').style.display = 'none';
+
+				let countdown = 3;
+				const countdownElement = document.getElementById('countdown');
+				countdownElement.textContent = countdown;
+
+				const interval = setInterval(() => {
+					countdown--;
+					if (countdown > 0) {
+						countdownElement.textContent = countdown;
+					} else {
+						clearInterval(interval);
+						countdownElement.textContent = 'Começa a partida!';
+						resolveMatchAndShowResult(matchObj);
+						document.getElementById('closeModal').style.display = 'inline-block';
+					}
+				}, 1000);
+
+				document.getElementById('closeModal').onclick = () => {
+					document.getElementById('modalOverlay').style.display = 'none';
+					if (callback) callback();
+				};
+			}
+
+			function resolveMatchAndShowResult(matchObj) {
+				let g1, g2;
+				if (matchObj.player2.isBye) {
+					g1 = Math.floor(Math.random() * 5) + 1;
+					g2 = 0;
+					matchObj.goals1 = g1;
+					matchObj.goals2 = g2;
+					matchObj.winner = matchObj.player1;
+					matchObj.diff = g1 - g2;
+				} else {
+					g1 = Math.floor(Math.random() * 6);
+					g2 = Math.floor(Math.random() * 6);
+					matchObj.goals1 = g1;
+					matchObj.goals2 = g2;
+					if (g1 > g2) {
+						matchObj.winner = matchObj.player1;
+						matchObj.diff = g1 - g2;
+					} else if (g2 > g1) {
+						matchObj.winner = matchObj.player2;
+						matchObj.diff = g2 - g1;
+					} else {
+						const penaltyResult = penaltyShootout(matchObj.player1, matchObj.player2);
+						matchObj.winner = penaltyResult.winner;
+						matchObj.penalties1 = penaltyResult.p1Score;
+						matchObj.penalties2 = penaltyResult.p2Score;
+						matchObj.diff = 0;
+					}
+				}
+
+				const resultText =
+					`Resultado: ${matchObj.goals1} x ${matchObj.goals2}` +
+					(matchObj.penalties1 !== undefined && matchObj.penalties2 !== undefined
+						? ` (Pênaltis: ${matchObj.penalties1} x ${matchObj.penalties2})`
+						: '');
+				document.getElementById('pyro').style.display = 'block';
+				document.getElementById('modalResult').textContent = resultText;
+			}
+
+			updateBracket();
+		</script>
+	</body>
+</html>

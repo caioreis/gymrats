@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Football Tournament</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				font-size: 14px;
+				background: #f3f3f3;
+			}
+			header {
+				background: #2c3e50;
+				color: #ecf0f1;
+				padding: 15px 20px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				position: fixed;
+				width: 100%;
+				top: 0;
+				z-index: 999;
+				box-sizing: border-box;
+			}
+			.title {
+				font-size: 20px;
+				margin: 0;
+			}
+			.round-info {
+				font-size: 14px;
+				opacity: 0.8;
+			}
+			.actions {
+				display: flex;
+				gap: 10px;
+				align-items: center;
+			}
+			#nextMatch {
+				background: #2980b9;
+				color: #ecf0f1;
+				border: none;
+				padding: 8px 12px;
+				font-size: 14px;
+				cursor: pointer;
+				border-radius: 4px;
+			}
+			#nextMatch:hover {
+				background: #3498db;
+			}
+			#info {
+				margin: 80px 20px 20px 20px;
+			}
+			.bracket-container {
+				display: inline-block;
+				white-space: nowrap;
+				overflow-x: auto;
+				overflow-y: hidden;
+				padding-bottom: 10px;
+				max-width: 100%;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				margin: 20px;
+				background: #fff;
+				box-sizing: border-box;
+			}
+			.round {
+				display: inline-block;
+				vertical-align: top;
+				margin: 0 20px;
+			}
+			.match {
+				display: block;
+				border: 1px solid #ddd;
+				background: #fff;
+				margin-bottom: 10px;
+				padding: 5px;
+				border-radius: 5px;
+				min-width: 160px;
+				position: relative;
+			}
+			.match:hover {
+				background: #f0f8ff;
+			}
+			.participant {
+				margin: 2px 0;
+				line-height: 1.2em;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+			.winner {
+				font-weight: bold;
+				color: green;
+			}
+			.bye {
+				font-style: italic;
+				color: #999;
+			}
+			.round:last-child .match {
+				border-color: #aaa;
+				background: #f9f9f9;
+			}
+			.photo {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+
+			/* Modal Styles */
+			#modalOverlay {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+			}
+
+			#modalContent {
+				background: #fff;
+				border-radius: 5px;
+				padding: 20px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 600px;
+				max-width: 90%;
+				text-align: center;
+			}
+
+			#closeModal {
+				background: #2980b9;
+				color: #ecf0f1;
+				border: none;
+				padding: 8px 12px;
+				font-size: 14px;
+				cursor: pointer;
+				border-radius: 4px;
+				margin-top: 20px;
+			}
+			#closeModal:hover {
+				background: #3498db;
+			}
+
+			.modal-participants {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				margin-bottom: 20px;
+				flex-wrap: wrap;
+			}
+
+			.modal-participant {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.modal-participant img {
+				width: 200px;
+				height: 200px;
+				object-fit: cover;
+				border-radius: 5px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div>
+				<h1 class="title">Football Tournament Bracket</h1>
+				<div class="round-info" id="roundInfo"></div>
+			</div>
+			<div class="actions">
+				<button id="nextMatch">Resolve Next Match</button>
+			</div>
+		</header>
+		<div id="info"></div>
+		<div class="bracket-container" id="bracket"></div>
+
+		<!-- Modal -->
+		<div id="modalOverlay">
+			<div id="modalContent">
+				<h2>Next Match</h2>
+				<div class="modal-participants" id="modalParticipants"></div>
+				<div id="countdown" style="font-size: 24px; margin-bottom: 20px"></div>
+				<div id="modalResult" style="font-size: 16px; color: #333; margin-bottom: 20px"></div>
+				<button id="closeModal" style="display: none">Close</button>
+			</div>
+		</div>
+
+		<script>
+			const data = {
+				teams: [
+					{ name: 'Jordania', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Jordania.jpg' },
+					{ name: 'Nayara', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Nayara+Reis.jpg' },
+					{ name: 'Marina Sanz', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Marina+Sanz.jpg' },
+					{ name: 'Anselmo Fernandes', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Anselmo+Fernandes.jpeg' },
+					{ name: 'Cecília', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Cecilia.png' },
+					{ name: 'Pedro Duarte', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Pedro+Duarte.jpg' },
+					{ name: 'Diego', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Diego+Santos.jpeg' },
+					{ name: 'Marina Greco', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Marina+Greco.jpeg' },
+					{ name: 'Luiz Andrade', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Luiz+Andrade.jpeg' },
+					{ name: 'Aralyne', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Aralyne+Gonçalves.png' },
+					{ name: 'Leonardo Fernandes', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Leonardo+Fernandes.jpg' },
+					{ name: 'Kaique Gazola', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Kaique.jpg' },
+					{ name: 'Mateus Carvalho', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Mateus+Carvalho.jpeg' },
+					{ name: 'Wendel Lima', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Wendel.jpg' },
+					{ name: 'Raphael Teodoro', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Raphael+Teodoro.png' },
+					{ name: 'Lucas Parada', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Lucas+Parada.jpg' },
+					{ name: 'Stefani', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Stefani.jpg' },
+					{ name: 'Aline Alves De Santana', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Aline+Santana.png' },
+					{ name: 'Arthur', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Arthur+Oliveira.jpeg' },
+					{ name: 'Kelly Souza', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Kelly.jpg' },
+					{ name: 'Cinthia Nunes', image: 'https://devhero.s3.us-east-1.amazonaws.com/eita/Cinthia+Nunes.jpeg' },
+				],
+			};
+
+			const brazilianTeamsData = [
+				{
+					name: 'Flamengo',
+					image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flamengo_braz_logo.svg/120px-Flamengo_braz_logo.svg.png',
+				},
+				{
+					name: 'Corinthians',
+					image: 'https://upload.wikimedia.org/wikipedia/pt/thumb/b/b4/Corinthians_simbolo.png/120px-Corinthians_simbolo.png',
+				},
+				{
+					name: 'Palmeiras',
+					image: 'https://s.sde.globo.com/media/organizations/2019/07/06/Palmeiras.svg',
+				},
+				{
+					name: 'São Paulo',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/sao-paulo.svg',
+				},
+				{
+					name: 'Santos',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/12/santos.svg',
+				},
+				{
+					name: 'Vasco',
+					image: 'https://s.sde.globo.com/media/organizations/2021/09/04/vasco_SVG.svg',
+				},
+				{
+					name: 'Cruzeiro',
+					image: 'https://s.sde.globo.com/media/organizations/2021/02/13/cruzeiro_2021.svg',
+				},
+				{
+					name: 'Fluminense',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/fluminense.svg',
+				},
+				{
+					name: 'Grêmio',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/12/gremio.svg',
+				},
+				{
+					name: 'Internacional',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/internacional.svg',
+				},
+				{
+					name: 'Atlético Mineiro',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/10/atletico-mg.svg',
+				},
+				{
+					name: 'Bahia',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/bahia.svg',
+				},
+				{
+					name: 'Botafogo',
+					image: 'https://s.sde.globo.com/media/organizations/2019/02/04/botafogo-svg.svg',
+				},
+				{
+					name: 'Goiás',
+					image: 'https://s.sde.globo.com/media/organizations/2021/03/01/GOIAS-2021.svg',
+				},
+				{
+					name: 'Athletico-PR',
+					image: 'https://s.sde.globo.com/media/organizations/2019/09/09/Athletico-PR.svg',
+				},
+				{
+					name: 'Ceará',
+					image: 'https://s.sde.globo.com/media/organizations/2019/10/10/ceara.svg',
+				},
+				{
+					name: 'Fortaleza',
+					image: 'https://s.sde.globo.com/media/organizations/2021/09/19/Fortaleza_2021_1.svg',
+				},
+				{
+					name: 'Sport Recife',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/sport.svg',
+				},
+				{
+					name: 'Vitória',
+					image: 'https://s.sde.globo.com/media/organizations/2024/04/09/escudo-vitoria-svg-69281.svg',
+				},
+				{
+					name: 'Chapecoense',
+					image: 'https://s.sde.globo.com/media/organizations/2021/06/21/CHAPECOENSE-2018.svg',
+				},
+				{
+					name: 'Ponte Preta',
+					image: 'https://s.sde.globo.com/media/organizations/2019/03/17/ponte-preta.svg',
+				},
+				{
+					name: 'Figueirense',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/figueirense.svg',
+				},
+				{
+					name: 'Avaí',
+					image: 'https://s.sde.globo.com/media/organizations/2024/05/12/ava%C3%AD.svg',
+				},
+				{
+					name: 'Juventude',
+					image: 'https://s.sde.globo.com/media/organizations/2021/04/29/Juventude-2021-01.svg',
+				},
+				{
+					name: 'Paraná',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/parana.svg',
+				},
+				{
+					name: 'Guarani',
+					image: 'https://s.sde.globo.com/media/organizations/2018/03/11/guarani.svg',
+				},
+			];
+			// Brazilian teams now as objects with name and image
+
+			function getRandomBrazilianTeam() {
+				const randomIndex = Math.floor(Math.random() * brazilianTeamsData.length);
+				const team = { ...brazilianTeamsData[randomIndex], isBye: true };
+				return team;
+			}
+
+			function shuffle(arr) {
+				for (let i = arr.length - 1; i > 0; i--) {
+					const j = Math.floor(Math.random() * (i + 1));
+					[arr[i], arr[j]] = [arr[j], arr[i]];
+				}
+				return arr;
+			}
+
+			function nextPowerOfTwo(n) {
+				let p = 1;
+				while (p < n) p *= 2;
+				return p;
+			}
+
+			let participants = shuffle(data.teams.slice());
+			const originalCount = participants.length;
+			const targetCount = nextPowerOfTwo(originalCount);
+			const byesNeeded = targetCount - originalCount;
+
+			function createFirstRound(participants, byesNeeded) {
+				const matches = [];
+				const participantsForByes = participants.slice(0, byesNeeded);
+				const remaining = participants.slice(byesNeeded);
+				for (let i = 0; i < byesNeeded; i++) {
+					matches.push({
+						player1: participantsForByes[i],
+						player2: getRandomBrazilianTeam(),
+						goals1: null,
+						goals2: null,
+						winner: null,
+						diff: null,
+					});
+				}
+				for (let i = 0; i < remaining.length; i += 2) {
+					const p1 = remaining[i];
+					const p2 = i + 1 < remaining.length ? remaining[i + 1] : getRandomBrazilianTeam();
+					matches.push({
+						player1: p1,
+						player2: p2,
+						goals1: null,
+						goals2: null,
+						winner: null,
+						diff: null,
+					});
+				}
+				return matches;
+			}
+
+			function createMatches(parts) {
+				const matches = [];
+				for (let i = 0; i < parts.length; i += 2) {
+					const p1 = parts[i];
+					const p2 = i + 1 < parts.length ? parts[i + 1] : getRandomBrazilianTeam();
+					matches.push({
+						player1: p1,
+						player2: p2,
+						goals1: null,
+						goals2: null,
+						winner: null,
+						diff: null,
+					});
+				}
+				return matches;
+			}
+
+			let roundsData = [];
+			roundsData.push(createFirstRound(participants, byesNeeded));
+			let currentRoundIndex = 0;
+			let currentMatchIndex = 0;
+
+			function updateRoundInfo() {
+				document.getElementById('roundInfo').textContent = `Round ${currentRoundIndex + 1}`;
+			}
+
+			function penaltyShootout(player1, player2) {
+				// Each team shoots 5 penalties first
+				let p1Score = 0;
+				let p2Score = 0;
+				const totalPenalties = 5;
+
+				for (let i = 0; i < totalPenalties; i++) {
+					if (Math.random() < 0.7) {
+						p1Score++;
+					}
+					if (Math.random() < 0.7) {
+						p2Score++;
+					}
+				}
+
+				while (p1Score === p2Score) {
+					if (Math.random() < 0.7) {
+						p1Score++;
+					}
+					if (Math.random() < 0.7) {
+						p2Score++;
+					}
+				}
+
+				const winner = p1Score > p2Score ? player1 : player2;
+				return { winner, p1Score, p2Score };
+			}
+
+			function startNextRound() {
+				const roundMatches = roundsData[currentRoundIndex];
+				const winners = roundMatches.map((m) => m.winner);
+				if (winners.length === 1) return;
+				roundsData.push(createMatches(winners));
+				currentRoundIndex++;
+				currentMatchIndex = 0;
+			}
+
+			function updateBracket() {
+				updateRoundInfo();
+				const bracketContainer = document.getElementById('bracket');
+				bracketContainer.innerHTML = '';
+				for (let r = 0; r < roundsData.length; r++) {
+					const roundDiv = document.createElement('div');
+					roundDiv.classList.add('round');
+					const roundMatches = roundsData[r];
+					for (let m = 0; m < roundMatches.length; m++) {
+						const match = roundMatches[m];
+						const matchDiv = document.createElement('div');
+						matchDiv.classList.add('match');
+						const p1Div = document.createElement('div');
+						p1Div.classList.add('participant');
+						const img1 = document.createElement('img');
+						img1.classList.add('photo');
+						img1.src = match.player1.image;
+						p1Div.appendChild(img1);
+						const p1Name = document.createElement('span');
+						p1Name.textContent = match.player1.name;
+						p1Div.appendChild(p1Name);
+						if (match.winner === match.player1) p1Div.classList.add('winner');
+
+						const p2Div = document.createElement('div');
+						p2Div.classList.add('participant');
+						const img2 = document.createElement('img');
+						img2.classList.add('photo');
+						img2.src = match.player2.image;
+						p2Div.appendChild(img2);
+						const p2Name = document.createElement('span');
+						p2Name.textContent = match.player2.name;
+						p2Div.appendChild(p2Name);
+						if (match.player2.isBye) p2Div.classList.add('bye');
+						if (match.winner === match.player2) p2Div.classList.add('winner');
+
+						matchDiv.appendChild(p1Div);
+						matchDiv.appendChild(p2Div);
+
+						if (match.goals1 !== null && match.goals2 !== null) {
+							const score = document.createElement('div');
+							score.style.fontSize = '12px';
+							score.style.color = '#333';
+							let scoreText = `Score: ${match.goals1} x ${match.goals2}`;
+							if (match.penalties1 !== undefined && match.penalties2 !== undefined) {
+								scoreText += ` (Penalties: ${match.penalties1} x ${match.penalties2})`;
+							}
+							score.textContent = scoreText;
+							matchDiv.appendChild(score);
+						}
+						roundDiv.appendChild(matchDiv);
+					}
+					bracketContainer.appendChild(roundDiv);
+				}
+				const infoDiv = document.getElementById('info');
+				const lastRound = roundsData[roundsData.length - 1];
+				if (lastRound.length === 1 && lastRound[0].winner) {
+					infoDiv.innerHTML = `<h2>Final Winner: <span class='winner'>${lastRound[0].winner.name}</span></h2>`;
+				} else {
+					infoDiv.innerHTML = '';
+				}
+			}
+
+			document.getElementById('nextMatch').addEventListener('click', showNextMatchModal);
+
+			function showNextMatchModal() {
+				const lastRound = roundsData[roundsData.length - 1];
+				if (lastRound.length === 1 && lastRound[0].winner) {
+					alert('Tournament ended! Winner: ' + lastRound[0].winner.name);
+					return;
+				}
+				const roundMatches = roundsData[currentRoundIndex];
+				if (currentMatchIndex >= roundMatches.length) {
+					startNextRound();
+					updateBracket();
+					return;
+				}
+				const matchObj = roundMatches[currentMatchIndex];
+				if (matchObj.winner) {
+					currentMatchIndex++;
+					showNextMatchModal();
+					return;
+				}
+
+				// Show modal
+				document.getElementById('modalOverlay').style.display = 'block';
+				const modalParticipants = document.getElementById('modalParticipants');
+				modalParticipants.innerHTML = `
+    <div class="modal-participant">
+      <img src="${matchObj.player1.image}" />
+      <div>${matchObj.player1.name}</div>
+    </div>
+    <div style="font-weight:bold;">VS</div>
+    <div class="modal-participant">
+      <img src="${matchObj.player2.image}" />
+      <div>${matchObj.player2.name}</div>
+    </div>
+  `;
+
+				document.getElementById('modalResult').textContent = '';
+				document.getElementById('closeModal').style.display = 'none';
+
+				let countdown = 3;
+				const countdownElement = document.getElementById('countdown');
+				countdownElement.textContent = countdown;
+
+				const interval = setInterval(() => {
+					countdown--;
+					if (countdown > 0) {
+						countdownElement.textContent = countdown;
+					} else {
+						clearInterval(interval);
+						countdownElement.textContent = 'GO!';
+						// Now resolve the match
+						resolveMatchAndShowResult(matchObj);
+					}
+				}, 1000);
+			}
+
+			function resolveMatchAndShowResult(matchObj) {
+				let g1, g2;
+
+				if (matchObj.player2.isBye) {
+					g1 = Math.floor(Math.random() * 5) + 1;
+					g2 = 0;
+					matchObj.goals1 = g1;
+					matchObj.goals2 = g2;
+					matchObj.winner = matchObj.player1;
+					matchObj.diff = g1 - g2;
+				} else {
+					g1 = Math.floor(Math.random() * 6);
+					g2 = Math.floor(Math.random() * 6);
+					matchObj.goals1 = g1;
+					matchObj.goals2 = g2;
+					if (g1 > g2) {
+						matchObj.winner = matchObj.player1;
+						matchObj.diff = g1 - g2;
+					} else if (g2 > g1) {
+						matchObj.winner = matchObj.player2;
+						matchObj.diff = g2 - g1;
+					} else {
+						// Tie: penalties
+						const penaltyResult = penaltyShootout(matchObj.player1, matchObj.player2);
+						matchObj.winner = penaltyResult.winner;
+						matchObj.penalties1 = penaltyResult.p1Score;
+						matchObj.penalties2 = penaltyResult.p2Score;
+						matchObj.diff = 0;
+					}
+				}
+
+				const resultText =
+					`Result: ${matchObj.goals1} x ${matchObj.goals2}` +
+					(matchObj.penalties1 !== undefined && matchObj.penalties2 !== undefined
+						? ` (Penalties: ${matchObj.penalties1} x ${matchObj.penalties2})`
+						: '');
+
+				document.getElementById('modalResult').textContent = resultText;
+				document.getElementById('closeModal').style.display = 'inline-block';
+
+				currentMatchIndex++;
+			}
+
+			document.getElementById('closeModal').addEventListener('click', () => {
+				document.getElementById('modalOverlay').style.display = 'none';
+				const roundMatches = roundsData[currentRoundIndex];
+				if (currentMatchIndex >= roundMatches.length) {
+					startNextRound();
+				}
+				updateBracket();
+			});
+
+			updateBracket();
+		</script>
+	</body>
+</html>
